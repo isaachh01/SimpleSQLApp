@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logistics Manager Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
+  <body>
+    <div class="ldash">
+      <header class="ldash-header">
+        <div class="ldash-title-block">
+          <div class="ldash-title">Logistics Manager Dashboard</div>
+          <div class="ldash-subtitle">Real-time fleet tracking &amp; sensor integrity monitoring</div>
+        </div>
+        <div class="ldash-header-right">
+          <div class="ldash-updated">
+            <span class="ldash-spinner" aria-hidden="true"></span>
+            <span id="updatedText">Last updated —</span>
+          </div>
+          <div class="ldash-alerts-badge" id="alertsBadge">—</div>
+        </div>
+      </header>
+
+      <div class="ldash-grid-top">
+        <section class="ldash-panel ldash-map-panel">
+          <div class="ldash-panel-title">Live Asset Map</div>
+          <div class="ldash-map">
+            <div class="ldash-map-lines" aria-hidden="true"></div>
+            <div class="ldash-map-label">[ MAP TILES PLACEHOLDER ]</div>
+          </div>
+          <div class="ldash-map-legend" id="mapLegend">
+            <div>
+              <div class="ldash-legend-title">Traffic Status</div>
+              <div class="ldash-legend-row">
+                <span class="ldash-tag ldash-tag-solid">CLEAR</span>
+                <span class="ldash-tag ldash-tag-dashed">DETOUR</span>
+                <span class="ldash-tag ldash-tag-dotted">HEAVY</span>
+              </div>
+            </div>
+            <div>
+              <div class="ldash-legend-title">Shipment Status</div>
+              <div class="ldash-legend-row">
+                <span class="ldash-tag ldash-tag-solid">IN TRANSIT</span>
+                <span class="ldash-tag ldash-tag-dashed">DELAYED</span>
+                <span class="ldash-tag ldash-tag-dotted">DELIVERED</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ldash-panel ldash-alerts-panel">
+          <div class="ldash-panel-title">Data Integrity Alerts</div>
+          <div class="ldash-alerts-summary" id="alertsSummary">— of — assets flagged</div>
+          <div class="ldash-alerts-list" id="alertsList"></div>
+        </section>
+      </div>
+
+      <section class="ldash-panel ldash-table-panel">
+        <div class="ldash-table-header">
+          <div class="ldash-panel-title">Asset Status</div>
+          <div class="ldash-table-caption" id="tableCaption"></div>
+        </div>
+        <div class="ldash-table" id="assetTable">
+          <div class="ldash-th">Asset ID</div>
+          <div class="ldash-th">Shipment Status</div>
+          <div class="ldash-th">Logistics Delay</div>
+          <div class="ldash-th ldash-th-right">Waiting Time</div>
+          <div class="ldash-th">Traffic Status</div>
+        </div>
+      </section>
+
+      <div class="ldash-grid-bottom">
+        <section class="ldash-panel">
+          <div class="ldash-panel-title">Temperature — Time Series</div>
+          <div class="ldash-chart-sub">
+            °C over time, x-axis = timestamp · shaded band = safe operating range
+          </div>
+          <div class="ldash-chart-placeholder">[ PLACEHOLDER ]</div>
+        </section>
+        <section class="ldash-panel">
+          <div class="ldash-panel-title">Humidity — Time Series</div>
+          <div class="ldash-chart-sub">
+            % RH over time, x-axis = timestamp · shaded band = safe operating range
+          </div>
+          <div class="ldash-chart-placeholder">[ PLACEHOLDER ]</div>
+        </section>
+      </div>
+    </div>
+
+    <script src="/js/dashboard.js" defer></script>
+  </body>
+</html>
