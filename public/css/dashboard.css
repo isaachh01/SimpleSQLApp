@@ -102,38 +102,79 @@
   overflow: hidden;
 }
 
-.ldash-map-lines {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
+.ldash-map-canvas {
+  width: 100%;
+  height: 100%;
 }
 
-.ldash-map-lines::before,
-.ldash-map-lines::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 141%;
-  height: 1px;
-  background: var(--line);
-}
-
-.ldash-map-lines::before {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.ldash-map-lines::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.ldash-map-label {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-size: 11px;
-  color: var(--muted);
+/* Shown in place of the map when Leaflet fails to load. */
+.ldash-map.ldash-map-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--ink);
+  font-size: 14px;
+  font-weight: 700;
   font-family: monospace;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* Square off Leaflet's popup chrome to match the ink/paper look. */
+.leaflet-container {
+  font-family: Helvetica, Arial, sans-serif;
+  background: var(--panel-bg);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0;
+  border: 2px solid var(--ink);
+  box-shadow: none;
+}
+
+.leaflet-popup-tip {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.leaflet-popup-content {
+  margin: 10px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ldash-popup-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+
+.ldash-popup-integrity {
+  font-size: 10px;
+  font-weight: 700;
+  border: 1.5px solid var(--ink);
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+.ldash-popup-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ldash-popup-row + .ldash-popup-row {
+  margin-top: 2px;
+}
+
+.ldash-popup-key {
+  color: var(--muted);
 }
 
 .ldash-map-legend {
@@ -326,8 +367,22 @@
   margin-bottom: 12px;
 }
 
-.ldash-chart-placeholder {
-  height: 180px;
+/* Chart.js needs a sized container (maintainAspectRatio: false), so the chart
+   wrapper gets a fixed height and the canvas fills it. */
+.ldash-chart {
+  position: relative;
+  height: 240px;
+}
+
+.ldash-chart canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Fallback shown when there is nothing to plot (offline, no readings, or the
+   chart library failed to load). */
+.ldash-chart.ldash-chart-empty {
   border: 1px dashed var(--ink);
   background: var(--panel-bg);
   display: flex;

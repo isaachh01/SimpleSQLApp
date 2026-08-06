@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Logistics Manager Dashboard</title>
     <link rel="stylesheet" href="/css/dashboard.css" />
+    <!-- Chart.js and Leaflet, both pinned to a specific version so the demo
+         is reproducible. These and dashboard.js are all defer'd, so they run
+         in document order and `Chart`/`L` exist before our code runs. -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+      defer
+    ></script>
   </head>
   <body>
     <div class="ldash">
@@ -25,9 +44,8 @@
       <div class="ldash-grid-top">
         <section class="ldash-panel ldash-map-panel">
           <div class="ldash-panel-title">Live Asset Map</div>
-          <div class="ldash-map">
-            <div class="ldash-map-lines" aria-hidden="true"></div>
-            <div class="ldash-map-label">[ MAP TILES PLACEHOLDER ]</div>
+          <div class="ldash-map" id="assetMapWrap">
+            <div class="ldash-map-canvas" id="assetMap"></div>
           </div>
           <div class="ldash-map-legend" id="mapLegend">
             <div>
@@ -76,14 +94,18 @@
           <div class="ldash-chart-sub">
             °C over time, x-axis = timestamp · shaded band = safe operating range
           </div>
-          <div class="ldash-chart-placeholder">[ PLACEHOLDER ]</div>
+          <div class="ldash-chart" id="tempChartWrap">
+            <canvas id="tempChart" aria-label="Temperature readings over time"></canvas>
+          </div>
         </section>
         <section class="ldash-panel">
           <div class="ldash-panel-title">Humidity — Time Series</div>
           <div class="ldash-chart-sub">
             % RH over time, x-axis = timestamp · shaded band = safe operating range
           </div>
-          <div class="ldash-chart-placeholder">[ PLACEHOLDER ]</div>
+          <div class="ldash-chart" id="humidityChartWrap">
+            <canvas id="humidityChart" aria-label="Humidity readings over time"></canvas>
+          </div>
         </section>
       </div>
     </div>
